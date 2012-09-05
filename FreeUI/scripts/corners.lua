@@ -3,27 +3,47 @@ local F, C, L = unpack(select(2, ...))
 local r, g, b = unpack(C.class)
 
 local last = 0
+local damageMeter = false
+
 F.menuShown = false
 
 local function onMouseUp(self)
 	self:SetScript("OnUpdate", nil)
+	self:SetScript("OnMouseUp", nil)
 	if F.menuShown then
 		ToggleFrame(DropDownList1)
 		F.menuShown = false
 		return
 	end
-
-	if IsAddOnLoaded("alDamageMeter") then
-		DisableAddOn("alDamageMeter")
-		DEFAULT_CHAT_FRAME:AddMessage("FreeUI: |cffffffffalDamageMeter disabled. Type|r /rl |cfffffffffor the changes to apply.|r", unpack(C.class))
-	else
-		EnableAddOn("alDamageMeter")
-		LoadAddOn("alDamageMeter")
-		if IsAddOnLoaded("alDamageMeter") then
-			DEFAULT_CHAT_FRAME:AddMessage("FreeUI: |cffffffffalDamageMeter loaded.|r", unpack(C.class))
-		else
-			DEFAULT_CHAT_FRAME:AddMessage("FreeUI: |cffffffffalDamageMeter not found!|r", unpack(C.class))
+	
+	if damageMeter then
+		if damageMeter == "alDamageMeter" then
+			if alDamageMeterFrame:IsShown() then
+				alDamageMeterFrame:Hide()
+			else
+				alDamageMeterFrame:Show()
+			end
+		elseif damageMeter == "Skada" then
+			local skadaWindows = Skada:GetWindows()
+			if #skadaWindows >= 1 then
+				skadaShown = skadaWindows[1]:IsShown()
+				for _, window in ipairs(skadaWindows) do
+					if skadaShown then
+						window:Hide()
+					else
+						window:Show()
+					end
+				end
+			end
+		elseif damageMeter == "Recount" then
+			if Recount_MainWindow:IsShown() then
+				Recount_MainWindow:Hide()
+			else
+				Recount_MainWindow:Show()
+			end
 		end
+	else
+		DEFAULT_CHAT_FRAME:AddMessage("FreeUI: |cffffffffDamage Meter not found!|r", unpack(C.class))
 	end
 end
 
@@ -87,7 +107,9 @@ f:SetScript("OnEnter", function()
 		GameTooltip:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -14, 14)
 		GameTooltip:AddLine("FreeUI", unpack(C.class))
 		GameTooltip:AddLine(" ")
-		GameTooltip:AddDoubleLine("Left-click:", "Toggle alDamageMeter", r, g, b, 1, 1, 1)
+		if damageMeter then
+			GameTooltip:AddDoubleLine("Left-click:", "Toggle " .. damageMeter, r, g, b, 1, 1, 1)
+		end
 		GameTooltip:AddDoubleLine("Right-click:", "Toggle DBM", r, g, b, 1, 1, 1)
 		GameTooltip:AddDoubleLine("Click and hold:", "Toggle micro menu", r, g, b, 1, 1, 1)
 		GameTooltip:Show()
@@ -99,6 +121,22 @@ f:SetScript("OnLeave", function()
 	f:SetAlpha(0)
 	GameTooltip:Hide()
 end)
+
+f:SetScript("OnEvent", function(event, arg1)
+		if event == "ADDON_LOADED" then
+			if arg1 == "alDamageMeter" then -- not tested
+				damageMeter = "alDamageMeter"
+			elseif arg1 == "Skada" then -- tested
+				damageMeter = "Skada"
+			elseif arg1 == "Recount" then-- not tested
+				damageMeter = "Recount"
+			end
+			if damageMeter then
+				f:UnregisterEvent("ADDON_LOADED")
+			end
+		end
+end)
+f:RegisterEvent("ADDON_LOADED")
 
 local g = CreateFrame("Frame")
 g:SetBackdrop({
