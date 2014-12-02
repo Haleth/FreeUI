@@ -58,6 +58,8 @@ C["automation"] = {
 C["actionbars"] = {
 	["enable"] = true,					-- enable the action bars
 	["enableStyle"] = true,				-- style the action bars (might have to be turned off for other addons)
+	["buttonSize"] = 26,		-- size of the buttons
+	["stanceBar"] = true,		-- toggle the stancebar
 
 	["hotkey"] = false, 				-- show hot keys on buttons
 	["rightbars_mouseover"] = false,	-- show right bars on mouseover (show/hide: use blizz option)

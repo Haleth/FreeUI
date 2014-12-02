@@ -4,13 +4,14 @@ local F, C, L = unpack(select(2, ...))
 
 if not C.actionbars.enable then return end
 
-local barWidth = C.actionbars.buttonSize * 12 + 11
+local buttonSize = C.actionbars.buttonSize
+local barWidth = buttonSize * 12 + 11
 
 --[[ MainMenuBar ]]
 
 local bar1 = CreateFrame("Frame", "FreeUI_MainMenuBar", UIParent, "SecureHandlerStateTemplate")
 bar1:SetWidth(barWidth)
-bar1:SetHeight(C.actionsbars.buttonSize)
+bar1:SetHeight(buttonSize)
 
 MainMenuBarArtFrame:SetParent(bar1)
 MainMenuBarArtFrame:EnableMouse(false)
@@ -20,7 +21,7 @@ MainMenuBar.slideOut.IsPlaying = function() return true end
 for i = 1, NUM_ACTIONBAR_BUTTONS do
 	local button = _G["ActionButton"..i]
 	button:ClearAllPoints()
-	button:SetSize(C.actionsbars.buttonSize, C.actionsbars.buttonSize)
+	button:SetSize(buttonSize, buttonSize)
 	if i == 1 then
 		button:SetPoint("BOTTOMLEFT", bar1, "BOTTOMLEFT", 0, 0)
 	else
@@ -35,7 +36,7 @@ RegisterStateDriver(bar1, "visibility", "[petbattle][overridebar][vehicleui][pos
 
 local bar2 = CreateFrame("Frame", "FreeUI_MultiBarBottomLeft", UIParent, "SecureHandlerStateTemplate")
 bar2:SetWidth(barWidth)
-bar2:SetHeight(C.actionsbars.buttonSize)
+bar2:SetHeight(buttonSize)
 
 MultiBarBottomLeft:SetParent(bar2)
 MultiBarBottomLeft:EnableMouse(false)
@@ -43,7 +44,7 @@ MultiBarBottomLeft:EnableMouse(false)
 for i = 1, NUM_ACTIONBAR_BUTTONS do
 	local button = _G["MultiBarBottomLeftButton"..i]
 	button:ClearAllPoints()
-	button:SetSize(C.actionsbars.buttonSize, C.actionsbars.buttonSize)
+	button:SetSize(buttonSize, buttonSize)
 	if i == 1 then
 		button:SetPoint("BOTTOMLEFT", bar2, "BOTTOMLEFT", 0, 0)
 	else
@@ -58,7 +59,7 @@ RegisterStateDriver(bar2, "visibility", "[petbattle][vehicleui][overridebar][pos
 
 local bar3 = CreateFrame("Frame", "FreeUI_MultiBarBottomRight", UIParent, "SecureHandlerStateTemplate")
 bar3:SetWidth(barWidth)
-bar3:SetHeight(C.actionsbars.buttonSize)
+bar3:SetHeight(buttonSize)
 
 MultiBarBottomRight:SetParent(bar3)
 MultiBarBottomRight:EnableMouse(false)
@@ -66,7 +67,7 @@ MultiBarBottomRight:EnableMouse(false)
 for i= 1, NUM_ACTIONBAR_BUTTONS do
 	local button = _G["MultiBarBottomRightButton"..i]
 	button:ClearAllPoints()
-	button:SetSize(C.actionsbars.buttonSize, C.actionsbars.buttonSize)
+	button:SetSize(buttonSize, buttonSize)
 	if i == 1 then
 		button:SetPoint("BOTTOMLEFT", bar3, "BOTTOMLEFT", 0, 0)
 	else
@@ -105,7 +106,7 @@ hooksecurefunc("MultiActionBar_Update", positionBars)
 
 local bar4 = CreateFrame("Frame", "FreeUI_MultiBarRight", UIParent, "SecureHandlerStateTemplate")
 bar4:SetHeight(barWidth)
-bar4:SetWidth(C.actionsbars.buttonSize)
+bar4:SetWidth(buttonSize)
 bar4:SetPoint("RIGHT", -C.appearance.padding, 0)
 
 MultiBarRight:SetParent(bar4)
@@ -114,7 +115,7 @@ MultiBarRight:EnableMouse(false)
 for i = 1, NUM_ACTIONBAR_BUTTONS do
 	local button = _G["MultiBarRightButton"..i]
 	button:ClearAllPoints()
-	button:SetSize(C.actionsbars.buttonSize, C.actionsbars.buttonSize)
+	button:SetSize(buttonSize, buttonSize)
 	if i == 1 then
 		button:SetPoint("TOPLEFT", bar4, 0,0)
 	else
@@ -129,8 +130,8 @@ RegisterStateDriver(bar4, "visibility", "[petbattle][vehicleui][overridebar][pos
 
 local bar5 = CreateFrame("Frame", "FreeUI_MultiBarLeft", UIParent, "SecureHandlerStateTemplate")
 bar5:SetHeight(barWidth)
-bar5:SetWidth(C.actionsbars.buttonSize)
-bar5:SetPoint("RIGHT", (C.appearance.padding + (C.actionbars.buttonSize + 3)) * -1, 0)
+bar5:SetWidth(buttonSize)
+bar5:SetPoint("RIGHT", -C.appearance.padding - buttonSize - 1, 0)
 
 MultiBarLeft:SetParent(bar5)
 MultiBarLeft:EnableMouse(false)
@@ -138,7 +139,7 @@ MultiBarLeft:EnableMouse(false)
 for i = 1, NUM_ACTIONBAR_BUTTONS do
 	local button = _G["MultiBarLeftButton"..i]
 	button:ClearAllPoints()
-	button:SetSize(C.actionsbars.buttonSize, C.actionsbars.buttonSize)
+	button:SetSize(buttonSize, buttonSize)
 	if i == 1 then
 		button:SetPoint("TOPLEFT", bar5, 0,0)
 	else
@@ -155,7 +156,7 @@ local numOverride = 7
 
 local override = CreateFrame("Frame", "FreeUI_OverrideBar", UIParent, "SecureHandlerStateTemplate")
 override:SetWidth(barWidth)
-override:SetHeight(C.actionsbars.buttonSize)
+override:SetHeight(buttonSize)
 override:SetPoint("BOTTOM", bar2, "TOP", 0, 1)
 
 OverrideActionBar:SetParent(override)
@@ -174,7 +175,7 @@ for i = 1, numOverride do
 		break
 	end
 	bu:ClearAllPoints()
-	bu:SetSize(C.actionsbars.buttonSize, C.actionsbars.buttonSize)
+	bu:SetSize(buttonSize, buttonSize)
 	if i == 1 then
 		bu:SetPoint("BOTTOMLEFT", override, "BOTTOMLEFT")
 	else
@@ -233,7 +234,7 @@ for i = 1, numpet do
 	local cd = _G["PetActionButton"..i.."Cooldown"]
 
 	button:ClearAllPoints()
-	button:SetSize(C.actionsbars.buttonSize, C.actionsbars.buttonSize)
+	button:SetSize(buttonSize, buttonSize)
 
 	if i == 1 then
 		button:SetPoint("BOTTOMLEFT", petbar, 0,0)
@@ -250,7 +251,7 @@ RegisterStateDriver(petbar, "visibility", "[petbattle][overridebar][vehicleui][p
 --[[ Stance/possess bar]]
 
 local stancebar = CreateFrame("Frame", "FreeUI_StanceBar", UIParent, "SecureHandlerStateTemplate")
-stancebar:SetHeight(C.actionsbars.buttonSize)
+stancebar:SetHeight(buttonSize)
 stancebar:SetPoint("BOTTOM", bar1, "TOP", 0, 2)
 
 StanceBarFrame:SetParent(stancebar)
@@ -258,7 +259,7 @@ StanceBarFrame:EnableMouse(false)
 
 for i = 1, NUM_STANCE_SLOTS do
 	local button = _G["StanceButton"..i]
-	button:SetSize(C.actionsbars.buttonSize, C.actionsbars.buttonSize)
+	button:SetSize(buttonSize, buttonSize)
 	button:ClearAllPoints()
 	if i == 1 then
 		button:SetPoint("BOTTOMLEFT", stancebar, 0, 0)
@@ -273,7 +274,7 @@ PossessBarFrame:EnableMouse(false)
 
 for i = 1, NUM_POSSESS_SLOTS do
 	local button = _G["PossessButton"..i]
-	button:SetSize(C.actionsbars.buttonSize, C.actionsbars.buttonSize)
+	button:SetSize(buttonSize, buttonSize)
 	button:ClearAllPoints()
 	if i == 1 then
 		button:SetPoint("BOTTOMLEFT", stancebar, 0, 0)
