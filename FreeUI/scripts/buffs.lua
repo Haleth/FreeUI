@@ -84,7 +84,7 @@ local f = CreateFrame("Frame", "FreeUI_BuffFrameHolder", UIParent)
 local mapOffset = -C.appearance.padding
 
 if C.minimap.position == 1 then
-	mapOffset = (C.minimap.size + C.buffPadding) * -1
+	mapOffset = -(C.minimap.size + C.buffPadding)
 end
 
 f:SetSize(50, 50)

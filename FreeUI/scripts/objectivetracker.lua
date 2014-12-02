@@ -4,23 +4,23 @@ local ot = ObjectiveTrackerFrame
 local BlocksFrame = ot.BlocksFrame
 
 -- [[ Positioning ]]
-local position = C.minimap.position
-local offset = (C.minimap.size + C.minimap.buffPadding) * -1
+local minimapPosition = C.minimap.position
+local offset = -(C.minimap.size + C.minimap.buffPadding)
 
 local function moveTracker()
 	local xCoord, yAnchor
 
 	if MultiBarLeft:IsShown() then
-		xCoord = -84
+		xCoord = -C.appearance.padding - (buttonSize * 2) - 1
 	elseif MultiBarRight:IsShown() then
-		xCoord = -57
+		xCoord = -C.appearance.padding - buttonSize - 1
 	else
 		xCoord = -C.appearance.padding
 	end
 
 	yAnchor = VehicleSeatIndicator:IsShown() and VehicleSeatIndicator or Minimap
 
-	if position == 1 then
+	if minimapPosition == 1 then
 		yAnchor = 0
 	end
 

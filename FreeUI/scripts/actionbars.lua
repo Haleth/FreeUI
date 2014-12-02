@@ -284,7 +284,7 @@ for i = 1, NUM_POSSESS_SLOTS do
 	end
 end
 
-if C.actionsbar.stanceBar == true then
+if C.actionsbar.stanceBar then
 	RegisterStateDriver(stancebar, "visibility", "[petbattle][vehicleui][overridebar][possessbar,@vehicle,exists] hide; show")
 else
 	RegisterStateDriver(stancebar, "visibility", "hide")
