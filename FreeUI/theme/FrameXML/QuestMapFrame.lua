@@ -120,7 +120,7 @@ tinsert(C.themes["FreeUI"], function()
 	ShowMapButton.Text:SetPoint("CENTER", 1, 0)
 
 	ShowMapButton:ClearAllPoints()
-	ShowMapButton:SetPoint("TOPRIGHT", QuestLogPopupDetailFrame, -30, -25)
+	ShowMapButton:SetPoint("TOPRIGHT", QuestLogPopupDetailFrame, C.appearance.padding * -1, -25)
 
 	F.Reskin(ShowMapButton)
 

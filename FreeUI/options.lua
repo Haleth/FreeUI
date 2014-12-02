@@ -33,12 +33,13 @@ C["appearance"] = {
 	["fontOutline"] = true,
 	["fontOutlineStyle"] = 2,		-- 1 = normal, 2 = monochrome
 	["fontShadow"] = false,
+	["padding"] = 30, 					-- padding between edge of screen and UI elements
 }
 
 C["minimap"] = {
-	["size"] = 220,  					-- size of the minimap
-	["position"] = 2,  			 	-- 1 = top right, 2 = bottom right, 3 = top left, 4 = bottom left
-	["buffPadding"] = 30  		-- amount of padding between map and buffs (only if position = 1)
+	["size"] = 220,  						-- size of the minimap
+	["position"] = 2,  					-- 1 = top right, 2 = bottom right, 3 = top left, 4 = bottom left
+	["buffPadding"] = 30  			-- amount of padding between map and buffs (only if position = 1)
 }
 
 C["automation"] = {

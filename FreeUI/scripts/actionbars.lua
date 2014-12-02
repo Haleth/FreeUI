@@ -106,7 +106,7 @@ hooksecurefunc("MultiActionBar_Update", positionBars)
 local bar4 = CreateFrame("Frame", "FreeUI_MultiBarRight", UIParent, "SecureHandlerStateTemplate")
 bar4:SetHeight(barWidth)
 bar4:SetWidth(C.actionsbars.buttonSize)
-bar4:SetPoint("RIGHT", -30, 0)
+bar4:SetPoint("RIGHT", C.appearance.padding * -1, 0)
 
 MultiBarRight:SetParent(bar4)
 MultiBarRight:EnableMouse(false)
@@ -130,7 +130,7 @@ RegisterStateDriver(bar4, "visibility", "[petbattle][vehicleui][overridebar][pos
 local bar5 = CreateFrame("Frame", "FreeUI_MultiBarLeft", UIParent, "SecureHandlerStateTemplate")
 bar5:SetHeight(barWidth)
 bar5:SetWidth(C.actionsbars.buttonSize)
-bar5:SetPoint("RIGHT", -57, 0)
+bar5:SetPoint("RIGHT", (C.appearance.padding + (C.actionbars.buttonSize + 3)) * -1, 0)
 
 MultiBarLeft:SetParent(bar5)
 MultiBarLeft:EnableMouse(false)

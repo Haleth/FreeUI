@@ -22,3 +22,50 @@ local F, C, L = unpack(select(2, ...))
 local name = C.myName
 local class = C.myClass
 local realm = C.myRealm
+
+C["appearance"] = {
+	["fontUseAlternativeFont"] = true,
+	["fontSizeNormal"] = 14,
+	["fontOutlineStyle"] = 1,		-- 1 = normal, 2 = monochrome
+	["padding"] = 0 							-- padding from the edge pf the screen
+}
+
+C["minimap"] = {
+	["position"] = 1  			 	-- 1 = top right, 2 = bottom right, 3 = top left, 4 = bottom left
+}
+
+C["actionbars"] = {
+	["buttonSize"] = 40,				-- size of the buttons
+	["stanceBar"] = false, 			-- toggle the stancebar
+
+	["hotkey"] = true, 				-- show hot keys on buttons
+	["rightbars_mouseover"] = true	-- show right bars on mouseover (show/hide: use blizz option)
+}
+
+C["bags"] = {
+	["style"] = 2							-- 1 = all-in-one, 2 = restyle default bags, 3 = do nothing
+}
+
+C["menubar"] = {
+	["enable"] = false
+}
+
+C["unitframes"] = {
+	["enableArena"] = false,								-- enable arena/flag carrier frames
+	["targettarget"] = true, 							-- show target of target frame
+
+	["cast"] = {"BOTTOM", UIParent, "CENTER", 0, -305},	-- only applies with 'castbar' set to 2
+	["castbarSeparate"] = false, 						-- true for a separate player cast bar
+		["castbarSeparateOnlyCasters"] = false, 				-- separate bar only for mages/warlocks/priests
+	["pvp"] = false, 									-- show pvp icon on player frame
+	["statusIndicator"] = false,						-- show combat/resting status on player frame
+		["statusIndicatorCombat"] = false,					-- show combat status (else: only resting)
+
+	["player_height"] = 24,
+	["target_height"] = 24,
+	["party_width_healer"] = 75,
+}
+
+C["classmod"] = {
+	["monk"] = false, 			-- chi, stagger bar
+}
