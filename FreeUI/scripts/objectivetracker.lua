@@ -4,6 +4,8 @@ local ot = ObjectiveTrackerFrame
 local BlocksFrame = ot.BlocksFrame
 
 -- [[ Positioning ]]
+local position = C.minimap.position
+local offset = (C.minimap.size + C.minimap.buffPadding) * -1
 
 local function moveTracker()
 	local xCoord, yAnchor
@@ -13,14 +15,18 @@ local function moveTracker()
 	elseif MultiBarRight:IsShown() then
 		xCoord = -57
 	else
-		xCoord = -30
+		xCoord = C.appearance.padding * -1
 	end
 
 	yAnchor = VehicleSeatIndicator:IsShown() and VehicleSeatIndicator or Minimap
 
+	if position == 1 then
+		yAnchor = 0
+	end
+
 	ot:ClearAllPoints()
-	ot:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", xCoord, -160)
-	ot:SetPoint("BOTTOM", yAnchor, "TOP", 0, 220) -- bogus positioning because we can't touch ObjectiveTracker_CanFitBlock
+	ot:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", xCoord, offset)
+	ot:SetPoint("BOTTOM", yAnchor, "TOP", 0, 320) -- bogus positioning because we can't touch ObjectiveTracker_CanFitBlock
 end
 
 hooksecurefunc(ot, "SetPoint", function(_, _, _, point)

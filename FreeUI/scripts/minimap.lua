@@ -2,8 +2,22 @@ local F, C, L = unpack(select(2, ...))
 
 local r, g, b = unpack(C.class)
 
+local position = C.minimap.position
+local mapSize = C.minimap.size
+
 Minimap:ClearAllPoints()
-Minimap:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -31, 31)
+
+if position == 1 then
+	Minimap:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT")
+elseif position == 2 then
+	Minimap:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT")
+elseif position == 3 then
+	Minimap:SetPoint("TOPLEFT", UIParent, "TOPLEFT")
+elseif position == 4 then
+	Minimap:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT")
+end
+
+Minimap:SetSize(mapSize,mapSize)
 Minimap:SetMaskTexture("Interface\\Buttons\\WHITE8X8")
 F.CreateBG(Minimap)
 

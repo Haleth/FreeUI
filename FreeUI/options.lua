@@ -27,18 +27,19 @@ C["general"] = {
 C["appearance"] = {
 	["colourScheme"] = 1,			-- 1 = class coloured, 2 = custom
 		["customColour"] = {r = 1, g = 1, b = 1},
-	["fontUseAlternativeFont"] = false,
-	["fontSizeNormal"] = 8,
+	["fontUseAlternativeFont"] = true,
+	["fontSizeNormal"] = 14,
 	["fontSizeLarge"] = 16,
 	["fontOutline"] = true,
-	["fontOutlineStyle"] = 2,		-- 1 = normal, 2 = monochrome
+	["fontOutlineStyle"] = 1,		-- 1 = normal, 2 = monochrome
 	["fontShadow"] = false,
+	["padding"] = 0 							-- padding from the edge pf the screen
 }
 
 C["automation"] = {
 	["autoAccept"] = true,			-- auto accept invites from friends and guildies
 	["autoRepair"] = true,			-- automatically repair items
-		["autoRepair_guild"] = false,		-- use guild funds for auto repairs
+		["autoRepair_guild"] = true,		-- use guild funds for auto repairs
 	["autoRoll"] = true, 			-- automatically DE or greed on BoE greens (DE priority)
 		["autoRoll_maxLevel"] = true, 		-- only automatically roll on items at max level
 	["autoSell"] = true,			-- automatically sell greys
@@ -48,16 +49,24 @@ C["automation"] = {
 	["questRewardHighlight"] = true, -- highlights the quest reward with highest vendor price
 }
 
+C["minimap"] = {
+	["size"] = 220,  		-- size of the minimap
+	["position"] = 1,  			 -- 1 = top right, 2 = bottom right, 3 = top left, 4 = bottom left
+	["buffPadding"] = 30  -- amount of padding between map and buffs
+}
+
 C["actionbars"] = {
 	["enable"] = true,					-- enable the action bars
 	["enableStyle"] = true,				-- style the action bars (might have to be turned off for other addons)
+	["buttonSize"] = 40,				-- size of the buttons
+	["stanceBar"] = false, 			-- toggle the stancebar
 
-	["hotkey"] = false, 				-- show hot keys on buttons
-	["rightbars_mouseover"] = false,	-- show right bars on mouseover (show/hide: use blizz option)
+ 	["hotkey"] = true, 				-- show hot keys on buttons
+	["rightbars_mouseover"] = true,	-- show right bars on mouseover (show/hide: use blizz option)
 }
 
 C["bags"] = {
-	["style"] = 1,						-- 1 = all-in-one, 2 = restyle default bags, 3 = do nothing
+	["style"] = 2,						-- 1 = all-in-one, 2 = restyle default bags, 3 = do nothing
 
 	["size"] = 37,						-- change the size of the bags/bank, default = 37
 	["slotsShowAlways"] = false, 		-- always show the bag item slots
@@ -66,7 +75,7 @@ C["bags"] = {
 }
 
 C["menubar"] = {
-	["enable"] = true,
+	["enable"] = false,
 
 	["enableButtons"] = true,			-- show buttons for quick access on the menu bar
 		["buttons_mouseover"] = true,			-- only on mouseover
@@ -100,34 +109,34 @@ C["unitframes"] = {
 		["healerClasscolours"] = false,						-- colour unitframes by class in healer layout
 		["limitRaidSize"] = false, 							-- show a maximum of 25 players in a raid
 		["partyNameAlways"] = false,						-- show name on party/raid frames in dps/tank layout
-	["enableArena"] = true,								-- enable arena/flag carrier frames
-	["targettarget"] = false, 							-- show target of target frame
+	["enableArena"] = false,								-- enable arena/flag carrier frames
+	["targettarget"] = true, 							-- show target of target frame
 
 	["absorb"] = true, 									-- absorb bar/over absorb glow
-	["cast"] = {"BOTTOM", UIParent, "CENTER", 0, -105},	-- only applies with 'castbar' set to 2
-	["castbarSeparate"] = true, 						-- true for a separate player cast bar
-		["castbarSeparateOnlyCasters"] = true, 				-- separate bar only for mages/warlocks/priests
-	["pvp"] = true, 									-- show pvp icon on player frame
+	["cast"] = {"BOTTOM", UIParent, "CENTER", 0, -305},	-- only applies with 'castbar' set to 2
+	["castbarSeparate"] = false, 						-- true for a separate player cast bar
+		["castbarSeparateOnlyCasters"] = false, 				-- separate bar only for mages/warlocks/priests
+	["pvp"] = false, 									-- show pvp icon on player frame
 	["statusIndicator"] = false,						-- show combat/resting status on player frame
-		["statusIndicatorCombat"] = true,					-- show combat status (else: only resting)
+		["statusIndicatorCombat"] = false,					-- show combat status (else: only resting)
 
 	["player"] = {"BOTTOM", UIParent, "CENTER", -275, -105},
 	["target"] = {"TOP", UIParent, "CENTER", 0, -225},
 	["target_heal"] = {"BOTTOM", UIParent, "CENTER", 275, -105},
-	["party"] = {"TOP", UIParent, "CENTER", 0, -225}, 	-- only applies with healer layout enabled
+	["party"] = {"TOP", UIParent, "CENTER", 2220, -22225}, 	-- only applies with healer layout enabled
 	["raid"] = {"TOP", UIParent, "CENTER", 0, -185}, 	-- only applies with healer layout enabled
 
 	["altpower_height"] = 1,
 	["power_height"] = 1,
 
 	["player_width"] = 229,
-	["player_height"] = 14,
+	["player_height"] = 24,
 	["target_width"] = 229,
-	["target_height"] = 14,
+	["target_height"] = 24,
 	["targettarget_width"] = 229,
 	["targettarget_height"] = 8,
 	["focus_width"] = 113,
-	["focus_height"] = 8,
+	["focus_height"] = 20,
 	["pet_width"] = 113,
 	["pet_height"] = 8,
 	["boss_width"] = 170,
@@ -136,7 +145,7 @@ C["unitframes"] = {
 	["arena_height"] = 14,
 	["party_width"] = 38,
 	["party_height"] = 24,
-	["party_width_healer"] = 56,
+	["party_width_healer"] = 75,
 	["party_height_healer"] = 42,
 
 	["num_player_debuffs"] = 8,
@@ -152,7 +161,7 @@ C["classmod"] = {
 	["druidEclipse"] = true, 	-- eclipse bar
 	["druidMana"] = true, 		-- shapeshift mana bar
 	["mage"] = true, 			-- rune of power
-	["monk"] = true, 			-- chi, stagger bar
+	["monk"] = false, 			-- chi, stagger bar
 	["paladinHP"] = true, 		-- holy power
 	["paladinRF"] = true, 		-- righteous fury
 	["priest"] = true,			-- shadow orbs
@@ -306,9 +315,9 @@ C["buffTracker"] = {
 	},
 	["MONK"] = {
 		-- Tiger Power
-		{spellIds = {[125359]=true}, unitId = "player", isMine = 1, filter = "HELPFUL", slot = 1},
+		--{spellIds = {[125359]=true}, unitId = "player", isMine = 1, filter = "HELPFUL", slot = 1},
 		-- Tigereye Brew
-		{spellIds = {[125195]=true}, unitId = "player", isMine = 1, filter = "HELPFUL", slot = 3, minStack = 10},
+		--{spellIds = {[125195]=true}, unitId = "player", isMine = 1, filter = "HELPFUL", slot = 3, minStack = 10},
 	},
 	["PALADIN"] = {
 		-- Sacred Shield

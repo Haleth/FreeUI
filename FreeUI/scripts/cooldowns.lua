@@ -31,18 +31,32 @@ local function Timer_OnUpdate(self, elapsed)
 end
 
 local methods = getmetatable(ActionButton1Cooldown).__index
-hooksecurefunc(methods, "SetCooldown", function(self, start, duration, charges)
+hooksecurefunc(methods, "SetCooldown", function(self, start, duration, fontSize, charges)
+	if not duration then
+		duration = 0
+	end
+
 	if start > 0 and duration > 2.5 then
 		if self.noshowcd or (charges and charges ~= 0) then return end
 
 		self.start = start
 		self.duration = duration
 		self.nextUpdate = 0
+		self.fontSize = fontSize
 
 		local text = self.text
+
+		if not fontSize then
+			fontSize = 24
+		end
+
 		if not text then
-			text = F.CreateFS(self, C.FONT_SIZE_NORMAL, "CENTER")
-			text:SetPoint("BOTTOM", 1, -1)
+			text = F.CreateFS(self, fontSize, "CENTER")
+			if fontSize < 10  then
+				text:SetFont(C.media.font, fontSize, "OUTLINE")
+			end
+			text:SetPoint("CENTER", 1, -1)
+			text:SetTextColor(1.0, 1.0, 0.0, 1.0)
 			self.text = text
 			self:SetScript("OnUpdate", Timer_OnUpdate)
 		end
@@ -62,7 +76,7 @@ abEventWatcher:SetScript("OnEvent", function(self, event)
 	for cooldown in pairs(active) do
 		local button = cooldown:GetParent()
 		local start, duration, enable, charges, maxCharges = GetActionCooldown(button.action)
-		cooldown:SetCooldown(start, duration, charges, maxCharges)
+		cooldown:SetCooldown(start, duration, fontSize, charges, maxCharges)
 	end
 end)
 abEventWatcher:RegisterEvent("ACTIONBAR_UPDATE_COOLDOWN")

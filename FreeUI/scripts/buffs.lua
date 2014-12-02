@@ -81,8 +81,14 @@ local function updateDebuffAnchors(_, index)
 end
 
 local f = CreateFrame("Frame", "FreeUI_BuffFrameHolder", UIParent)
+local mapOffset = C.appearance.padding * -1
+
+if C.minimap.position == 1 then
+	mapOffset = (C.minimap.size + C.buffPadding) * -1
+end
+
 f:SetSize(50, 50)
-f:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -30, -30)
+f:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", mapOffset, mapOffset)
 
 BuffFrame:SetParent(f)
 BuffFrame:ClearAllPoints()

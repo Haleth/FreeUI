@@ -30,10 +30,12 @@ local function updateHotkey(self)
 		if not self.styledHotkey then
 			ho:ClearAllPoints()
 			ho:SetWidth(0)
-			ho:SetPoint("CENTER", 1, 0)
+
+			ho:SetPoint("BOTTOM", 1, 0)
 			F.SetFS(ho)
 			ho:SetJustifyH("RIGHT")
 			ho:SetDrawLayer("OVERLAY", 1)
+			ho:SetFont(C.media.font, 8, "OUTLINE")
 			self.styledHotkey = true
 		end
 
@@ -55,6 +57,10 @@ local function updateHotkey(self)
 			text = text:gsub("Insert", "Ins")
 			text = text:gsub("Num Lock", "NL")
 			text = text:gsub("Home", "Hm")
+			text = text:gsub("Left Arrow", "LA")
+			text = text:gsub("Right Arrow", "RA")
+			text = text:gsub("Down Arrow", "DA")
+			text = text:gsub("Up Arrow", "UA")
 
 			ho:SetText("|cffffffff"..text)
 		end
