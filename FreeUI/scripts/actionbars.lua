@@ -85,17 +85,17 @@ local function positionBars()
 	local leftShown, rightShown = MultiBarBottomLeft:IsShown(), MultiBarBottomRight:IsShown()
 
 	if leftShown and rightShown then
-		bar3:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, C.appearance.padding * -1)
+		bar3:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -C.appearance.padding)
 		bar2:SetPoint("BOTTOM", bar3, "TOP", 0, 1)
 		bar1:SetPoint("BOTTOM", bar2, "TOP", 0, 1)
 	elseif leftShown then
-		bar2:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, C.appearance.padding * -1)
+		bar2:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -C.appearance.padding)
 		bar1:SetPoint("BOTTOM", bar2, "TOP", 0, 1)
 	elseif rightShown then
-		bar3:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, C.appearance.padding * -1)
+		bar3:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -C.appearance.padding)
 		bar1:SetPoint("BOTTOM", bar3, "TOP", 0, 1)
 	else
-		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, C.appearance.padding * -1)
+		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -C.appearance.padding)
 	end
 end
 
@@ -106,7 +106,7 @@ hooksecurefunc("MultiActionBar_Update", positionBars)
 local bar4 = CreateFrame("Frame", "FreeUI_MultiBarRight", UIParent, "SecureHandlerStateTemplate")
 bar4:SetHeight(barWidth)
 bar4:SetWidth(C.actionsbars.buttonSize)
-bar4:SetPoint("RIGHT", C.appearance.padding * -1, 0)
+bar4:SetPoint("RIGHT", -C.appearance.padding, 0)
 
 MultiBarRight:SetParent(bar4)
 MultiBarRight:EnableMouse(false)

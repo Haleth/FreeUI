@@ -302,7 +302,7 @@ editBox:SetScript("OnEscapePressed", function() frame:Hide() wipe(lines) end)
 
 local scrollArea = CreateFrame("ScrollFrame", "BCMCopyScroll", frame, "UIPanelScrollFrameTemplate")
 scrollArea:SetPoint("TOPLEFT", frame, "TOPLEFT", 8, -8)
-scrollArea:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", C.appearance.padding * -1, 8)
+scrollArea:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -C.appearance.padding, 8)
 scrollArea:SetScrollChild(editBox)
 
 local function GetLines(...)

@@ -60,7 +60,7 @@ C.themes["Blizzard_GuildBankUI"] = function()
 	F.CreateBD(bd)
 	F.CreateBD(GuildBankPopupEditBox, .25)
 
-	GuildBankPopupFrame:SetPoint("TOPLEFT", GuildBankFrame, "TOPRIGHT", 2, C.appearance.padding * -1)
+	GuildBankPopupFrame:SetPoint("TOPLEFT", GuildBankFrame, "TOPRIGHT", 2, -C.appearance.padding)
 
 	GuildBankFrameWithdrawButton:SetPoint("RIGHT", GuildBankFrameDepositButton, "LEFT", -1, 0)
 

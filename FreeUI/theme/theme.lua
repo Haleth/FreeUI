@@ -752,7 +752,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		NPCFriendshipStatusBarNotch4:SetSize(1, 16)
 		select(7, NPCFriendshipStatusBar:GetRegions()):Hide()
 
-		NPCFriendshipStatusBar.icon:SetPoint("TOPLEFT", C.appearance.padding * -1, 7)
+		NPCFriendshipStatusBar.icon:SetPoint("TOPLEFT", -C.appearance.padding, 7)
 		F.CreateBDFrame(NPCFriendshipStatusBar, .25)
 
 		F.ReskinPortraitFrame(GossipFrame, true)

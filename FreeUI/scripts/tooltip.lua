@@ -9,7 +9,7 @@ hooksecurefunc("GameTooltip_SetDefaultAnchor", function(self, parent)
 		self:SetOwner(parent, "ANCHOR_CURSOR")
 	else
 		self:SetOwner(parent, "ANCHOR_NONE")
-		self:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", C.appearance.padding * -1, 282)
+		self:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -C.appearance.padding, 282)
 	end
 end)
 

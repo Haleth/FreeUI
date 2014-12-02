@@ -81,7 +81,7 @@ local function updateDebuffAnchors(_, index)
 end
 
 local f = CreateFrame("Frame", "FreeUI_BuffFrameHolder", UIParent)
-local mapOffset = C.appearance.padding * -1
+local mapOffset = -C.appearance.padding
 
 if C.minimap.position == 1 then
 	mapOffset = (C.minimap.size + C.buffPadding) * -1

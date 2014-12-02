@@ -15,7 +15,7 @@ local function moveTracker()
 	elseif MultiBarRight:IsShown() then
 		xCoord = -57
 	else
-		xCoord = C.appearance.padding * -1
+		xCoord = -C.appearance.padding
 	end
 
 	yAnchor = VehicleSeatIndicator:IsShown() and VehicleSeatIndicator or Minimap
