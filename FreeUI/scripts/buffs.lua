@@ -84,11 +84,11 @@ local f = CreateFrame("Frame", "FreeUI_BuffFrameHolder", UIParent)
 local mapOffset = -C.appearance.padding
 
 if C.minimap.position == 1 then
-	mapOffset = -(C.minimap.size + C.buffPadding)
+	mapOffset = -(C.minimap.size + C.minimap.buffPadding + C.appearance.padding)
 end
 
 f:SetSize(50, 50)
-f:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", mapOffset, mapOffset)
+f:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", mapOffset, -C.appearance.padding)
 
 BuffFrame:SetParent(f)
 BuffFrame:ClearAllPoints()

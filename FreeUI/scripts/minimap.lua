@@ -8,7 +8,7 @@ local mapSize = C.minimap.size
 Minimap:ClearAllPoints()
 
 if position == 1 then
-	Minimap:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT")
+	Minimap:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -C.appearance.padding, -C.appearance.padding)
 elseif position == 2 then
 	Minimap:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT")
 elseif position == 3 then

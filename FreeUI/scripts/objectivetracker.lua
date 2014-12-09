@@ -6,6 +6,7 @@ local BlocksFrame = ot.BlocksFrame
 -- [[ Positioning ]]
 local minimapPosition = C.minimap.position
 local offset = -(C.minimap.size + C.minimap.buffPadding)
+local buttonSize = C.actionbars.buttonSize
 
 local function moveTracker()
 	local xCoord, yAnchor

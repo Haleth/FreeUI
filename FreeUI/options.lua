@@ -21,7 +21,7 @@ C["general"] = {
 		["rareAlert_playSound"] = true, 			-- play sound
 	["threatMeter"] = true,			-- threat bar above the target frame in dps/healer layout
 	["uiScaleAuto"] = true,			-- force the correct UI scale
-	["undressButton"] = true, 		-- undress button on dressup frame
+	["undressButton"] = true 		-- undress button on dressup frame
 }
 
 C["appearance"] = {
@@ -33,12 +33,12 @@ C["appearance"] = {
 	["fontOutline"] = true,
 	["fontOutlineStyle"] = 2,		-- 1 = normal, 2 = monochrome
 	["fontShadow"] = false,
-	["padding"] = 30,			-- padding between edge of screen and UI elements
+	["padding"] = 30			-- padding between edge of screen and UI elements
 }
 
 C["minimap"] = {
 	["size"] = 130,				-- size of the minimap
-	["position"] = 2,				-- 1 = top right, 2 = bottom right, 3 = top left, 4 = bottom left
+	["position"] = 2,			-- 1 = top right, 2 = bottom right, 3 = top left, 4 = bottom left
 	["buffPadding"] = 30			-- amount of padding between map and buffs (only if position = 1)
 }
 
@@ -59,6 +59,7 @@ C["actionbars"] = {
 	["enable"] = true,					-- enable the action bars
 	["enableStyle"] = true,				-- style the action bars (might have to be turned off for other addons)
 	["buttonSize"] = 26,			-- size of the buttons
+	["smallFont"] = false,		-- enable if you use the alternative font but still want pixel font for buttons
 	["stanceBar"] = true,			-- toggle the stancebar
 
 	["hotkey"] = false, 				-- show hot keys on buttons
@@ -315,9 +316,9 @@ C["buffTracker"] = {
 	},
 	["MONK"] = {
 		-- Tiger Power
-		{spellIds = {[125359]=true}, unitId = "player", isMine = 1, filter = "HELPFUL", slot = 1},
+		--{spellIds = {[125359]=true}, unitId = "player", isMine = 1, filter = "HELPFUL", slot = 1},
 		-- Tigereye Brew
-		{spellIds = {[125195]=true}, unitId = "player", isMine = 1, filter = "HELPFUL", slot = 3, minStack = 10},
+		--{spellIds = {[125195]=true}, unitId = "player", isMine = 1, filter = "HELPFUL", slot = 3, minStack = 10},
 	},
 	["PALADIN"] = {
 		-- Sacred Shield

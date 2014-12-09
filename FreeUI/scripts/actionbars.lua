@@ -86,17 +86,17 @@ local function positionBars()
 	local leftShown, rightShown = MultiBarBottomLeft:IsShown(), MultiBarBottomRight:IsShown()
 
 	if leftShown and rightShown then
-		bar3:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -C.appearance.padding)
+		bar3:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, C.appearance.padding)
 		bar2:SetPoint("BOTTOM", bar3, "TOP", 0, 1)
 		bar1:SetPoint("BOTTOM", bar2, "TOP", 0, 1)
 	elseif leftShown then
-		bar2:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -C.appearance.padding)
+		bar2:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, C.appearance.padding)
 		bar1:SetPoint("BOTTOM", bar2, "TOP", 0, 1)
 	elseif rightShown then
-		bar3:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -C.appearance.padding)
+		bar3:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, C.appearance.padding)
 		bar1:SetPoint("BOTTOM", bar3, "TOP", 0, 1)
 	else
-		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -C.appearance.padding)
+		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, C.appearance.padding)
 	end
 end
 
@@ -284,7 +284,7 @@ for i = 1, NUM_POSSESS_SLOTS do
 	end
 end
 
-if C.actionsbar.stanceBar then
+if C.actionbars.stanceBar then
 	RegisterStateDriver(stancebar, "visibility", "[petbattle][vehicleui][overridebar][possessbar,@vehicle,exists] hide; show")
 else
 	RegisterStateDriver(stancebar, "visibility", "hide")
