@@ -326,7 +326,7 @@ tinsert(C.themes["FreeUI"], function()
 		local frame = DigsiteCompleteToastFrame
 		local icon = frame.DigsiteTypeTexture
 
-		F.CreateBD(DigsiteCompleteToastFrame)
+		F.CreateBD(frame)
 
 		frame:GetRegions():Hide()
 
@@ -335,4 +335,97 @@ tinsert(C.themes["FreeUI"], function()
 		frame.shine:Hide()
 		frame.shine.Show = F.dummy
 	end
+
+	-- Garrison building alert
+
+	do
+		local frame = GarrisonBuildingAlertFrame
+		local icon = frame.Icon
+
+		frame:GetRegions():Hide()
+		frame.glow:SetTexture("")
+		frame.shine:SetTexture("")
+
+		local bg = CreateFrame("Frame", nil, frame)
+		bg:SetPoint("TOPLEFT", 8, -8)
+		bg:SetPoint("BOTTOMRIGHT", -8, 10)
+		bg:SetFrameLevel(frame:GetFrameLevel()-1)
+		F.CreateBD(bg)
+
+		icon:SetTexCoord(.08, .92, .08, .92)
+		icon:SetDrawLayer("ARTWORK")
+		F.CreateBG(icon)
+	end
+
+	-- Garrison mission alert
+
+	do
+		local frame = GarrisonMissionAlertFrame
+
+		frame:GetRegions():Hide()
+		frame.IconBG:Hide()
+		frame.glow:SetTexture("")
+		frame.shine:SetTexture("")
+
+		local bg = CreateFrame("Frame", nil, frame)
+		bg:SetPoint("TOPLEFT", 8, -8)
+		bg:SetPoint("BOTTOMRIGHT", -8, 10)
+		bg:SetFrameLevel(frame:GetFrameLevel()-1)
+		F.CreateBD(bg)
+	end
+
+	-- Garrison follower alert
+
+	do
+		local frame = GarrisonFollowerAlertFrame
+
+		frame:GetRegions():Hide()
+		frame.FollowerBG:SetAlpha(0)
+		frame.glow:SetTexture("")
+		frame.shine:SetTexture("")
+
+		local bg = CreateFrame("Frame", nil, frame)
+		bg:SetPoint("TOPLEFT", 16, -3)
+		bg:SetPoint("BOTTOMRIGHT", -16, 16)
+		bg:SetFrameLevel(frame:GetFrameLevel()-1)
+		F.CreateBD(bg)
+
+		F.ReskinGarrisonPortrait(frame.PortraitFrame)
+	end
+
+	hooksecurefunc("GarrisonFollowerAlertFrame_ShowAlert", function(_, _, _, _, quality)
+		local color = BAG_ITEM_QUALITY_COLORS[quality]
+		if color then
+			GarrisonFollowerAlertFrame.PortraitFrame.squareBG:SetBackdropBorderColor(color.r, color.g, color.b)
+		else
+			GarrisonFollowerAlertFrame.PortraitFrame.squareBG:SetBackdropBorderColor(0, 0, 0)
+		end
+	end)
+
+	-- Loot upgrade alert
+
+	hooksecurefunc("LootUpgradeFrame_SetUp", function(frame)
+		if not frame.bg then
+			local bg = CreateFrame("Frame", nil, frame)
+			bg:SetPoint("TOPLEFT", 10, -10)
+			bg:SetPoint("BOTTOMRIGHT", -10, 10)
+			bg:SetFrameLevel(frame:GetFrameLevel()-1)
+			F.CreateBD(bg)
+			frame.bg = bg
+
+			frame.Background:Hide()
+
+			F.ReskinIcon(frame.Icon)
+			frame.Icon:SetDrawLayer("BORDER", 5)
+			frame.Icon:ClearAllPoints()
+			frame.Icon:SetPoint("CENTER", frame.BaseQualityBorder)
+		end
+
+		frame.BaseQualityBorder:SetTexture(C.media.backdrop)
+		frame.UpgradeQualityBorder:SetTexture(C.media.backdrop)
+		frame.BaseQualityBorder:SetSize(52, 52)
+		frame.UpgradeQualityBorder:SetSize(52, 52)
+		frame.BaseQualityBorder:SetVertexColor(frame.BaseQualityItemName:GetTextColor())
+		frame.UpgradeQualityBorder:SetVertexColor(frame.UpgradeQualityItemName:GetTextColor())
+	end)
 end)
