@@ -57,7 +57,7 @@ hooksecurefunc(methods, "SetCooldown", function(self, start, duration, fontSize,
 				text:SetFont(C.media.font, fontSize, "OUTLINE")
 			end
 			
-			if C.actionbars.smallFont == true then
+			if C.actionbars.smallFont == true and C.fontUseAlternativeFont == true then
 				text:SetPoint("CENTER", 1, -1)
 				text:SetFont(C.media.font2, C.actionbars.buttonSize / 2, "OUTLINE")
 			else
