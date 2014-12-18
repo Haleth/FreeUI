@@ -42,26 +42,23 @@ hooksecurefunc(methods, "SetCooldown", function(self, start, duration, fontSize,
 		self.start = start
 		self.duration = duration
 		self.nextUpdate = 0
-		self.fontSize = fontSize
-
+		
+		local fontSize = fontSize
 		local text = self.text
 
 		if not fontSize then
-			fontSize = C.FONT_SIZE_NORMAL
+			fontSize = C.appearance.fontSizeNormal
 		end
 
 		if not text then
 			text = F.CreateFS(self, fontSize, "CENTER")
 
-			if fontSize < 10  then
-				text:SetFont(C.media.font, fontSize, "OUTLINE")
-			end
-			
-			if C.actionbars.smallFont == true and C.fontUseAlternativeFont == true then
-				text:SetPoint("CENTER", 1, -1)
-				text:SetFont(C.media.font2, C.actionbars.buttonSize / 2, "OUTLINE")
+			if C.actionbars.smallFont and C.actionbars.fontUseAlternativeFont == true and fontSize > 8 then
+				text:SetPoint("CENTER", 0, 0)
+				text:SetFont(C.media.font2, fontSize, "OUTLINE")
 			else
-				text:SetPoint("BOTTOM", 1, -1)
+				text:SetFont(C.media.font, fontSize, "OUTLINE")
+				text:SetPoint("BOTTOM", 0, 0)
 			end
 			
 			text:SetTextColor(C.actionbars.buttonCooldownColor.r, C.actionbars.buttonCooldownColor.g, C.actionbars.buttonCooldownColor.b, 1.0)
@@ -85,6 +82,12 @@ abEventWatcher:SetScript("OnEvent", function(self, event)
 	for cooldown in pairs(active) do
 		local button = cooldown:GetParent()
 		local start, duration, enable, charges, maxCharges = GetActionCooldown(button.action)
+		local fontSize = C.appearance.fontSizeNormal
+		
+		if C.appearance.fontUseAlternativeFont == true then
+			fontSize = 16
+		end
+		
 		cooldown:SetCooldown(start, duration, fontSize, charges, maxCharges)
 	end
 end)
