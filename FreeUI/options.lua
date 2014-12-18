@@ -58,7 +58,7 @@ C["automation"] = {
 C["actionbars"] = {
 	["enable"] = true,					-- enable the action bars
 	["enableStyle"] = true,				-- style the action bars (might have to be turned off for other addons)
-	["buttonSize"] = 26,			-- size of the buttons
+	["buttonSize"] = 42,			-- size of the buttons
 	["smallFont"] = false,		-- enable if you use the alternative font but still want pixel font for buttons
 	["stanceBar"] = true,			-- toggle the stancebar
 
@@ -497,8 +497,8 @@ C["myBuffs"] = {
 	[61295] = true, -- Riptide
 	[974] = true, -- Earth Shield
 
-	[53563] = true, -- Beacon of Light
-	[114163] = true, -- Eternal Flame
+	[53563] = false, -- Beacon of Light
+	[156322] = true, -- Eternal Flame
 	[20925] = true, -- Sacred Shield
 
 	[119611] = true, -- Renewing Mist

@@ -10,10 +10,10 @@ C.appearance.fontOutlineStyle = 1
 C.appearance.padding = 0 
 
 C.minimap.size = 220
-C.minimap.position = 1  			 	-- 1 = top right, 2 = bottom right, 3 = top left, 4 = bottom left
+C.minimap.position =2  			 	-- 1 = top right, 2 = bottom right, 3 = top left, 4 = bottom left
 C.minimap.buffPadding = 30
 
-C.actionbars.buttonSize = 40				-- size of the buttons
+C.actionbars.buttonSize = 45				-- size of the buttons
 C.actionbars.stanceBar = false 			-- toggle the stancebar
 C.actionbars.hotkey = true				-- show hot keys on buttons
 C.actionbars.rightbars_mouseover = true	-- show right bars on mouseover (show/hide: use blizz option)
