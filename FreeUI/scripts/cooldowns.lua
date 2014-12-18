@@ -47,16 +47,25 @@ hooksecurefunc(methods, "SetCooldown", function(self, start, duration, fontSize,
 		local text = self.text
 
 		if not fontSize then
-			fontSize = 24
+			fontSize = C.FONT_SIZE_NORMAL
 		end
 
 		if not text then
 			text = F.CreateFS(self, fontSize, "CENTER")
+
 			if fontSize < 10  then
 				text:SetFont(C.media.font, fontSize, "OUTLINE")
 			end
-			text:SetPoint("CENTER", 1, -1)
-			text:SetTextColor(1.0, 1.0, 0.0, 1.0)
+			
+			if C.actionbars.smallFont == true then
+				text:SetPoint("CENTER", 1, -1)
+				text:SetFont(C.media.font2, C.actionbars.buttonSize / 2, "OUTLINE")
+			else
+				text:SetPoint("BOTTOM", 1, -1)
+			end
+			
+			text:SetTextColor(C.actionbars.buttonCooldownColor.r, C.actionbars.buttonCooldownColor.g, C.actionbars.buttonCooldownColor.b, 1.0)
+			
 			self.text = text
 			self:SetScript("OnUpdate", Timer_OnUpdate)
 		end

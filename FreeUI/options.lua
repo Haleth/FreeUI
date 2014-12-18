@@ -59,6 +59,7 @@ C["actionbars"] = {
 	["enable"] = true,					-- enable the action bars
 	["enableStyle"] = true,				-- style the action bars (might have to be turned off for other addons)
 	["buttonSize"] = 26	,			-- size of the buttons
+	["buttonCooldownColor"] = {r = 1, g = 1, b = 1}, 	-- color of the cooldown text on the buttons
 	["smallFont"] = false,			-- enable if you use the alternative font but still want pixel font for button text
 	["stanceBar"] = true,			-- toggle the stancebar
 
