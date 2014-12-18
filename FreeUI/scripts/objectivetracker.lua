@@ -21,7 +21,7 @@ local function moveTracker()
 
 	yAnchor = VehicleSeatIndicator:IsShown() and VehicleSeatIndicator or Minimap
 
-	if minimapPosition == 1 then
+	if minimapPosition == 1 or minimapPosition == 3 or minimapPosition == 4 then
 		yAnchor = 0
 	end
 

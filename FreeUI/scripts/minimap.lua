@@ -10,11 +10,11 @@ Minimap:ClearAllPoints()
 if position == 1 then
 	Minimap:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -C.appearance.padding, -C.appearance.padding)
 elseif position == 2 then
-	Minimap:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT")
+	Minimap:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -C.appearance.padding, -C.appearance.padding)
 elseif position == 3 then
-	Minimap:SetPoint("TOPLEFT", UIParent, "TOPLEFT")
+	Minimap:SetPoint("TOPLEFT", UIParent, "TOPLEFT", C.appearance.padding, -C.appearance.padding)
 elseif position == 4 then
-	Minimap:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT")
+	Minimap:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", C.appearance.padding, -C.appearance.padding)
 end
 
 Minimap:SetSize(mapSize,mapSize)
