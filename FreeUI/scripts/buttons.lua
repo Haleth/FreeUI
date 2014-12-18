@@ -35,10 +35,10 @@ local function updateHotkey(self)
 			ho:SetJustifyH("RIGHT")
 			ho:SetDrawLayer("OVERLAY", 1)
 			
-			--if C.actionbars.smallFont then
+			if C.actionbars.smallFont then
 				ho:SetFont(C.media.font, 8, "OUTLINE")
 				ho:SetPoint("BOTTOM", 1, 0)
-			--end
+			end
 			
 			self.styledHotkey = true
 		end

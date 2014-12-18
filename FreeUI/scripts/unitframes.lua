@@ -1878,7 +1878,7 @@ oUF:Factory(function(self)
 
 		local numGroup = GetNumGroupMembers()
 
-		if numGroup > 5 and numGroup < 26 then
+		if numGroup > 5 then
 			party:SetAttribute("showParty", false)
 			party:SetAttribute("showRaid", false)
 			raid:SetAttribute("showRaid", true)

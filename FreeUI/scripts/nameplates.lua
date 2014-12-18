@@ -140,7 +140,7 @@ local UpdateFrame = function(self)
 
 	self.healthBar:ClearAllPoints()
 	self.healthBar:SetPoint("CENTER", self.healthBar:GetParent())
-	self.healthBar:SetHeight(10 / barScale)
+	self.healthBar:SetHeight(5 / barScale)
 	self.healthBar:SetWidth(80 / barScale)
 
 	self.highlight:SetTexture(nil)
