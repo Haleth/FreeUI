@@ -31,38 +31,18 @@ local function Timer_OnUpdate(self, elapsed)
 end
 
 local methods = getmetatable(ActionButton1Cooldown).__index
-hooksecurefunc(methods, "SetCooldown", function(self, start, duration, fontSize, charges)
-	if not duration then
-		duration = 0
-	end
-
+hooksecurefunc(methods, "SetCooldown", function(self, start, duration, charges)
 	if start > 0 and duration > 2.5 then
 		if self.noshowcd or (charges and charges ~= 0) then return end
 
 		self.start = start
 		self.duration = duration
 		self.nextUpdate = 0
-		
-		local fontSize = fontSize
+
 		local text = self.text
-
-		if not fontSize then
-			fontSize = C.appearance.fontSizeNormal
-		end
-
 		if not text then
-			text = F.CreateFS(self, fontSize, "CENTER")
-
-			if C.actionbars.smallFont and C.actionbars.fontUseAlternativeFont == true and fontSize > 8 then
-				text:SetPoint("CENTER", 0, 0)
-				text:SetFont(C.media.font2, fontSize, "OUTLINE")
-			else
-				text:SetFont(C.media.font, fontSize, "OUTLINE")
-				text:SetPoint("BOTTOM", 0, 0)
-			end
-			
-			text:SetTextColor(C.actionbars.buttonCooldownColor.r, C.actionbars.buttonCooldownColor.g, C.actionbars.buttonCooldownColor.b, 1.0)
-			
+			text = F.CreateFS(self, C.FONT_SIZE_NORMAL, "CENTER")
+			text:SetPoint("BOTTOM", 1, -1)
 			self.text = text
 			self:SetScript("OnUpdate", Timer_OnUpdate)
 		end
@@ -82,13 +62,7 @@ abEventWatcher:SetScript("OnEvent", function(self, event)
 	for cooldown in pairs(active) do
 		local button = cooldown:GetParent()
 		local start, duration, enable, charges, maxCharges = GetActionCooldown(button.action)
-		local fontSize = C.appearance.fontSizeNormal
-		
-		if C.appearance.fontUseAlternativeFont == true then
-			fontSize = 16
-		end
-		
-		cooldown:SetCooldown(start, duration, fontSize, charges, maxCharges)
+		cooldown:SetCooldown(start, duration, charges, maxCharges)
 	end
 end)
 abEventWatcher:RegisterEvent("ACTIONBAR_UPDATE_COOLDOWN")

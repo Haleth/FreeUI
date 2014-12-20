@@ -141,7 +141,7 @@ local updateIcon = function(unit, icons, index, offset, filter, isDebuff, visibl
 			local cd = icon.cd
 			if(cd and not icons.disableCooldown) then
 				if(duration and duration > 0) then
-					cd:SetCooldown(timeLeft - duration, duration, 8)
+					cd:SetCooldown(timeLeft - duration, duration)
 					cd:Show()
 				else
 					cd:Hide()
