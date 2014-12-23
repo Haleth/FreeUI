@@ -489,7 +489,7 @@ C["myBuffs"] = {
 
 	[53563] = true, -- Beacon of Light
 	[156322] = true, -- Eternal Flame
-	[20925] = true, -- Sacred Shield
+	[148039] = true, -- Sacred Shield
 
 	[119611] = true, -- Renewing Mist
 	[116849] = true, -- Life Cocoon
