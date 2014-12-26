@@ -146,6 +146,8 @@ local function OnTooltipSetUnit(self)
 
 		local guildName, guildRankName = GetGuildInfo(unit)
 
+		local localizedClass, englishClass, classIndex = UnitClass(unit);
+
 		if guildName then
 			if C.tooltip.guildrank then
 				_G["GameTooltipTextLeft2"]:SetFormattedText("%s ("..color.."%s|r)", guildName, guildRankName)
@@ -155,7 +157,12 @@ local function OnTooltipSetUnit(self)
 		end
 
 		local n = guildName and 3 or 2
-		_G["GameTooltipTextLeft"..n]:SetFormattedText("%s %s", level, race)
+
+		if C.tooltip.class then
+			_G["GameTooltipTextLeft"..n]:SetFormattedText("%s %s "..color.."%s", level, race, localizedClass)
+		else
+			_G["GameTooltipTextLeft"..n]:SetFormattedText("%s %s", level, race)
+		end
 
 		if UnitIsPVP(unit) then
 			_G["GameTooltipTextLeft"..n + 1]:SetFormattedText("%s (%s)", UnitFactionGroup(unit), PVP)

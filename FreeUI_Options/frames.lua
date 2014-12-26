@@ -627,6 +627,9 @@ do
 
 	local title = ns.CreateCheckBox(tooltip, "title")
 	title:SetPoint("TOPLEFT", guildrank, "BOTTOMLEFT", 0, -8)
+
+	local class = ns.CreateCheckBox(tooltip, "class")
+	class:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 0, -8)
 end
 
 -- [[ Class specific ]]
