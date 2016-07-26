@@ -81,6 +81,7 @@ f:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -30, -30)
 BuffFrame:SetParent(f)
 BuffFrame:ClearAllPoints()
 BuffFrame:SetPoint("TOPRIGHT")
+BuffFrame.SetPoint = F.dummy
 
 for i = 1, NUM_TEMP_ENCHANT_FRAMES do
 	local bu = _G["TempEnchant"..i]
