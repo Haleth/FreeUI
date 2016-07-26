@@ -7,22 +7,22 @@ C.media = {
 	["arrowDown"] = "Interface\\AddOns\\FreeUI\\media\\arrow-down-active",
 	["arrowLeft"] = "Interface\\AddOns\\FreeUI\\media\\arrow-left-active",
 	["arrowRight"] = "Interface\\AddOns\\FreeUI\\media\\arrow-right-active",
-	["backdrop"] = "Interface\\AddOns\\FreeUI\\media\\blank", 					-- default backdrop
-	["checked"] = "Interface\\AddOns\\FreeUI\\media\\CheckButtonHilight", 		-- replace default checked texture
-	["font"] = "Interface\\AddOns\\FreeUI\\media\\pixel.ttf", 					-- default pixel font
-	["font2"] = "Fonts\\FRIZQT__.ttf", 					-- default font
-	["glow"] = "Interface\\AddOns\\FreeUI\\media\\glowTex", 					-- glow/shadow texture
+	["backdrop"] = "Interface\\ChatFrame\\ChatFrameBackground", -- default backdrop
+	["checked"] = "Interface\\AddOns\\FreeUI\\media\\CheckButtonHilight", -- replace default checked texture
+	["font"] = "Interface\\AddOns\\FreeUI\\media\\PFRondaSeven.ttf", -- default pixel font
+	["font2"] = "Interface\\AddOns\\FreeUI\\media\\font.ttf", -- default font
+	["glow"] = "Interface\\AddOns\\FreeUI\\media\\glowTex", -- glow/shadow texture
 	["gradient"] = "Interface\\AddOns\\FreeUI\\media\\gradient",
 	["roleIcons"] = "Interface\\Addons\\FreeUI\\media\\UI-LFG-ICON-ROLES",
-	["texture"] = "Interface\\AddOns\\FreeUI\\media\\Texture1", 				-- statusbar texture
+	["texture"] = "Interface\\AddOns\\FreeUI\\media\\statusbar", -- statusbar texture
 }
 
 local mainFont
 
 if C.appearance.fontUseAlternativeFont then
 	mainFont = C.media.font2
-elseif GetLocale() == "zhCN" then
-	mainFont = "Fonts\\ARKai_T.TTF"
+elseif GetLocale() == "ruRU" then
+	mainFont = "Interface\\AddOns\\FreeUI\\media\\iFlash705.ttf"
 else
 	mainFont = C.media.font
 end
@@ -30,38 +30,27 @@ end
 F.AddOptionsCallback("appearance", "fontUseAlternativeFont", function()
 	if C.appearance.fontUseAlternativeFont then
 		mainFont = C.media.font2
-	elseif GetLocale() == "zhCN" then
-		mainFont = "Fonts\\ARKai_T.TTF"
+	elseif GetLocale() == "ruRU" then
+		mainFont = "Interface\\AddOns\\FreeUI\\media\\iFlash705.ttf"
 	else
 		mainFont = C.media.font
 	end
 end)
 
 C.classcolours = {
-	["DEATHKNIGHT"] = {r = 187/255, g = 0, b = 42/255},
+	["DEATHKNIGHT"] = {r = 0.77, g = 0.12, b = 0.23},
 	["DEMONHUNTER"] = {r = 0.64, g = 0.19, b = 0.79},
-	["DRUID"] = {r = 0.94, g = 0.39, b = 0.1},
-	["HUNTER"] = {r = 126/255, g = 185/255, b = 18/255},
-	["MAGE"] = {r = 0.35, g = 0.76, b = 0.93},
-	["MONK"] = {r = 0.04, g = 0.85 , b = 0.53},
-	["PALADIN"] = {r = 241/255, g = 0, b = 168/255},
-	["PRIEST"] = {r = 219/255, g = 243/255, b = 1},
-	["ROGUE"] = {r = 1, g = 238/255, b = 0},
-	["SHAMAN"] = {r = 0.07, g = 0.42, b = 0.96},
-	["WARLOCK"] = {r = 136/255, g = 73/255, b = 223/255},
-	["WARRIOR"] = {r = 0.79, g = 0.61, b = 0.5},
+	["DRUID"] = {r = 1, g = 0.49, b = 0.04},
+	["HUNTER"] = {r = 0.67, g = 0.83, b = 0.45},
+	["MAGE"] = {r = 0.41, g = 0.80, b = 0.94},
+	["MONK"] = {r = 0.43, g = 1 , b = 0.50},
+	["PALADIN"] = {r = 0.96, g = 0.55, b = 0.73},
+	["PRIEST"] = {r = 1, g = 1, b = 1},
+	["ROGUE"] = {r = 1, g = 0.96, b = 0.41},
+	["SHAMAN"] = {r = 0, g = 0.44, b = 0.87},
+	["WARLOCK"] = {r = 0.58, g = 0.51, b = 0.79},
+	["WARRIOR"] = {r = 0.78, g = 0.61, b = 0.43},
 }
-
-FACTION_BAR_COLORS = {
-	[1] = {r = 0.63, g = 0, b = 0},
-	[2] = {r = 0.63, g = 0, b = 0},
-	[3] = {r = 0.63, g = 0, b = 0},
-	[4] = {r = 0.82, g = 0.67, b = 0},
-	[5] = {r = 0.32, g = 0.67, b = 0},
-	[6] = {r = 0.32, g = 0.67, b = 0},
-	[7] = {r = 0.32, g = 0.67, b = 0},
-	[8] = {r = 0, g = 0.75, b = 0.44},
-};
 
 local _, class = UnitClass("player")
 if C.appearance.colourScheme == 2 then
@@ -105,20 +94,8 @@ local CreateBD = function(f, a)
 		edgeFile = C.media.backdrop,
 		edgeSize = 1,
 	})
-	f:SetBackdropColor(.06, .06, .06, a or .9)
+	f:SetBackdropColor(0, 0, 0, a or .5)
 	f:SetBackdropBorderColor(0, 0, 0)
-
-	if not a then
-        f.tex = f.tex or f:CreateTexture(nil, "BACKGROUND", nil, 1)
-        f.tex:SetTexture([[Interface\AddOns\FreeUI\media\StripesThin]], true, true)
-        f.tex:SetAlpha(.5)
-        f.tex:SetAllPoints()
-        f.tex:SetHorizTile(true)
-        f.tex:SetVertTile(true)
-        f.tex:SetBlendMode("ADD")
-    else
-        f:SetBackdropColor(0, 0, 0, a)
-    end
 end
 
 F.CreateBD = CreateBD
@@ -138,16 +115,16 @@ end
 
 F.CreateSD = function(parent, size, r, g, b, alpha, offset)
 	local sd = CreateFrame("Frame", nil, parent)
-	sd.size = size or 4
-	sd.offset = offset or -1
+	sd.size = size or 5
+	sd.offset = offset or 0
 	sd:SetBackdrop({
 		edgeFile = C.media.glow,
 		edgeSize = sd.size,
 	})
-	sd:SetPoint("TOPLEFT", parent, -sd.size - 0 - sd.offset, sd.size + 0 + sd.offset)
-	sd:SetPoint("BOTTOMRIGHT", parent, sd.size + 0 + sd.offset, -sd.size - 0 - sd.offset)
-	sd:SetBackdropBorderColor(r or .03, g or .03, b or .03)
-	sd:SetAlpha(alpha or .6)
+	sd:SetPoint("TOPLEFT", parent, -sd.size - 1 - sd.offset, sd.size + 1 + sd.offset)
+	sd:SetPoint("BOTTOMRIGHT", parent, sd.size + 1 + sd.offset, -sd.size - 1 - sd.offset)
+	sd:SetBackdropBorderColor(r or 0, g or 0, b or 0)
+	sd:SetAlpha(alpha or 1)
 end
 
 F.CreateFS = function(parent, fontSize, justify)
@@ -163,11 +140,7 @@ F.SetFS = function(fontObject, fontSize)
 	local size
 
 	if(not fontSize or fontSize == C.FONT_SIZE_NORMAL) then
-		if GetLocale() == "zhCN" then
-			size = 12
-		else
-			size = C.appearance.fontSizeNormal
-		end
+		size = C.appearance.fontSizeNormal
 	elseif fontSize == C.FONT_SIZE_LARGE then
 		size = C.appearance.fontSizeLarge
 	elseif fontSize > 4 then -- actual size
@@ -176,11 +149,7 @@ F.SetFS = function(fontObject, fontSize)
 
 	local outline = nil
 	if C.appearance.fontOutline then
-		if GetLocale() == "zhCN" then
-			outline = "OUTLINE"
-		else
-			outline = C.appearance.fontOutlineStyle == 2 and "OUTLINEMONOCHROME" or "OUTLINE"
-		end
+		outline = C.appearance.fontOutlineStyle == 2 and "OUTLINEMONOCHROME" or "OUTLINE"
 	end
 
 	fontObject:SetFont(mainFont, size, outline)
@@ -215,14 +184,13 @@ F.CreatePulse = function(frame) -- pulse function originally by nightcracker
 end
 
 local r, g, b = unpack(C.class)
-local buttonR, buttonG, buttonB, buttonA = .06, .06, .06, .8
+local buttonR, buttonG, buttonB, buttonA = .3, .3, .3, .3
 
 local CreateGradient = function(f)
 	local tex = f:CreateTexture(nil, "BORDER")
 	tex:SetPoint("TOPLEFT", 1, -1)
 	tex:SetPoint("BOTTOMRIGHT", -1, 1)
-	tex:SetTexture(C.media.backdrop)
---	tex:SetGradientAlpha("VERTICAL", 0, 0, 0, .3, .35, .35, .35, .35)
+	tex:SetTexture(C.media.gradient)
 	tex:SetVertexColor(buttonR, buttonG, buttonB, buttonA)
 
 	return tex
@@ -230,22 +198,19 @@ end
 
 F.CreateGradient = CreateGradient
 
-local function StartGlow(f)
+local function colourButton(f)
 	if not f:IsEnabled() then return end
-	f:SetBackdropColor(r, g, b, .1)
+
+	f:SetBackdropColor(r, g, b, buttonA)
 	f:SetBackdropBorderColor(r, g, b)
-	f.glow:SetAlpha(1)
-	F.CreatePulse(f.glow)
 end
 
-local function StopGlow(f)
+local function clearButton(f)
 	f:SetBackdropColor(0, 0, 0, 0)
 	f:SetBackdropBorderColor(0, 0, 0)
-	f.glow:SetScript("OnUpdate", nil)
-	f.glow:SetAlpha(0)
 end
 
-F.Reskin = function(f, noGlow)
+F.Reskin = function(f, noHighlight)
 	f:SetNormalTexture("")
 	f:SetHighlightTexture("")
 	f:SetPushedTexture("")
@@ -259,21 +224,11 @@ F.Reskin = function(f, noGlow)
 
 	F.CreateBD(f, 0)
 
-	CreateGradient(f)
+	f.tex = CreateGradient(f)
 
-	if not noGlow then
-		f.glow = CreateFrame("Frame", nil, f)
-		f.glow:SetBackdrop({
-			edgeFile = C.media.glow,
-			edgeSize = 5,
-		})
-		f.glow:SetPoint("TOPLEFT", -6, 6)
-		f.glow:SetPoint("BOTTOMRIGHT", 6, -6)
-		f.glow:SetBackdropBorderColor(r, g, b)
-		f.glow:SetAlpha(0)
-
-		f:HookScript("OnEnter", StartGlow)
- 		f:HookScript("OnLeave", StopGlow)
+	if not noHighlight then
+		f:HookScript("OnEnter", colourButton)
+ 		f:HookScript("OnLeave", clearButton)
 	end
 end
 
@@ -303,27 +258,16 @@ local function clearScroll(f)
 	f.tex:SetVertexColor(1, 1, 1)
 end
 
-F.ReskinScroll = function(f, parent)
+F.ReskinScroll = function(f)
 	local frame = f:GetName()
 
-	if frame then
-		if _G[frame.."Track"] then _G[frame.."Track"]:Hide() end
-		if _G[frame.."BG"] then _G[frame.."BG"]:Hide() end
-		if _G[frame.."Top"] then _G[frame.."Top"]:Hide() end
-		if _G[frame.."Middle"] then _G[frame.."Middle"]:Hide() end
-		if _G[frame.."Bottom"] then _G[frame.."Bottom"]:Hide() end
-	else
-		if f.trackBG then f.trackBG:Hide() end
-		if f.Background then f.Background:Hide() end
-		if f.Top then f.Top:Hide() end
-		if f.Middle then f.Middle:Hide() end
-		if f.Bottom then f.Bottom:Hide() end
-		if f.ScrollBarTop then f.ScrollBarTop:Hide() end
-		if f.ScrollBarMiddle then f.ScrollBarMiddle:Hide() end
-		if f.ScrollBarBottom then f.ScrollBarBottom:Hide() end
-	end
+	if _G[frame.."Track"] then _G[frame.."Track"]:Hide() end
+	if _G[frame.."BG"] then _G[frame.."BG"]:Hide() end
+	if _G[frame.."Top"] then _G[frame.."Top"]:Hide() end
+	if _G[frame.."Middle"] then _G[frame.."Middle"]:Hide() end
+	if _G[frame.."Bottom"] then _G[frame.."Bottom"]:Hide() end
 
-	local bu = f.ThumbTexture or f.thumbTexture or _G[frame.."ThumbTexture"]
+	local bu = _G[frame.."ThumbTexture"]
 	bu:SetAlpha(0)
 	bu:SetWidth(17)
 
@@ -336,8 +280,8 @@ F.ReskinScroll = function(f, parent)
 	tex:SetPoint("TOPLEFT", bu.bg, 1, -1)
 	tex:SetPoint("BOTTOMRIGHT", bu.bg, -1, 1)
 
-	local up = f.ScrollUpButton or f.UpButton or _G[(frame or parent).."ScrollUpButton"]
- 	local down = f.ScrollDownButton or f.DownButton or _G[(frame or parent).."ScrollDownButton"]
+	local up = _G[frame.."ScrollUpButton"]
+	local down = _G[frame.."ScrollDownButton"]
 
 	up:SetWidth(17)
 	down:SetWidth(17)
@@ -400,15 +344,15 @@ F.ReskinDropDown = function(f)
 	if right then right:SetAlpha(0) end
 
 	local bg = CreateFrame("Frame", nil, f)
- 	bg:SetPoint("TOPLEFT", 10, -4)
- 	bg:SetPoint("BOTTOMRIGHT", -12, 8)
- 	bg:SetFrameLevel(f:GetFrameLevel()-1)
- 	F.CreateBD(bg, 0)
-  
- 	local gradient = F.CreateGradient(f)
- 	gradient:SetPoint("TOPLEFT", bg, 1, -1)
- 	gradient:SetPoint("BOTTOMRIGHT", bg, -1, 1)
- 
+	bg:SetPoint("TOPLEFT", 10, -4)
+	bg:SetPoint("BOTTOMRIGHT", -12, 8)
+	bg:SetFrameLevel(f:GetFrameLevel()-1)
+	F.CreateBD(bg, 0)
+
+	local gradient = F.CreateGradient(f)
+	gradient:SetPoint("TOPLEFT", bg, 1, -1)
+	gradient:SetPoint("BOTTOMRIGHT", bg, -1, 1)
+
  	local down = _G[frame.."Button"]
 
 	down:SetSize(20, 20)
@@ -456,7 +400,7 @@ F.ReskinClose = function(f, a1, p, a2, x, y)
 		f:ClearAllPoints()
 		f:SetPoint(a1, p, a2, x, y)
 	else
-		f:SetPoint("TOPRIGHT", -4, -4)
+		f:SetPoint("TOPRIGHT", -6, -6)
 	end
 
 	f:SetNormalTexture("")
@@ -663,28 +607,24 @@ F.SetBD = function(f, x, y, x2, y2)
 	end
 	bg:SetFrameLevel(f:GetFrameLevel()-1)
 	F.CreateBD(bg)
-	F.CreateSD(bg)
 end
 
 F.ReskinPortraitFrame = function(f, isButtonFrame)
 	local name = f:GetName()
 
-	f.Bg:Hide()
+	_G[name.."Bg"]:Hide()
 	_G[name.."TitleBg"]:Hide()
-	f.portrait:Hide()
-	f.portraitFrame:Hide()
+	_G[name.."Portrait"]:Hide()
+	_G[name.."PortraitFrame"]:Hide()
 	_G[name.."TopRightCorner"]:Hide()
-	f.topLeftCorner:Hide()
-	f.topBorderBar:Hide()
-	f.TopTileStreaks:SetTexture("")
+	_G[name.."TopLeftCorner"]:Hide()
+	_G[name.."TopBorder"]:Hide()
+	_G[name.."TopTileStreaks"]:SetTexture("")
 	_G[name.."BotLeftCorner"]:Hide()
 	_G[name.."BotRightCorner"]:Hide()
 	_G[name.."BottomBorder"]:Hide()
-	f.leftBorderBar:Hide()
+	_G[name.."LeftBorder"]:Hide()
 	_G[name.."RightBorder"]:Hide()
-
-	F.ReskinClose(f.CloseButton)
-	f.portrait.Show = F.dummy
 
 	if isButtonFrame then
 		_G[name.."BtnCornerLeft"]:SetTexture("")
@@ -696,7 +636,7 @@ F.ReskinPortraitFrame = function(f, isButtonFrame)
 	end
 
 	F.CreateBD(f)
-	F.CreateSD(f)
+	F.ReskinClose(_G[name.."CloseButton"])
 end
 
 F.CreateBDFrame = function(f, a)
@@ -807,9 +747,3 @@ F.ReskinIcon = function(icon)
 	icon:SetTexCoord(.08, .92, .08, .92)
 	return F.CreateBG(icon)
 end
-
-
-
-DEFAULT_CHAT_FRAME:AddMessage("FreeUI.Fluffy |cffffffff"..GetAddOnMetadata("FreeUI", "Version"), unpack(C.class))
-DEFAULT_CHAT_FRAME:AddMessage("|cfffffffftype|r /freeui |cffffffffto open options GUI|r", unpack(C.class))
-DEFAULT_CHAT_FRAME:AddMessage("|cffffffffFor more info visit|r https://github.com/solor/FreeUI.Fluffy|r", unpack(C.class))
