@@ -58,7 +58,7 @@ C.themes["Blizzard_InspectUI"] = function()
 			F.CreateBG(bu.Icon)
 		end
 	end
-	
+
 	-- Talents
 
 	local inspectSpec = InspectTalentFrame.InspectSpec
