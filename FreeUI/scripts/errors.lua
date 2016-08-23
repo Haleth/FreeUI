@@ -31,17 +31,31 @@ firstErrorFrame.text:SetPoint("TOP", UIParent, 0, -76)
 secondErrorFrame.text = F.CreateFS(secondErrorFrame)
 secondErrorFrame.text:SetPoint("TOP", UIParent, 0, -85)
 
+-- Translate from Error Number to a user-friendly string.
+local function TranslateError(err)
+
+	-- By no means a full list, but covers most common ones and some Fury specific ones.
+	if err == 55 then return "That is not ready yet." end
+	if err == 149 then return "" end -- Isn't a blizzard error, not shown. Probably (You cannot do that while mounted)
+	if err == 193 then return "There is nothing to attack." end
+	if err == 220 then return "You need a target." end
+	if err == 250 then return "You need a 2H Weapon in your Offhand." end
+	if err == 359 then return "That is too far away." end
+
+	return "Unknown error: " .. err
+end
+
 local state = 0
 firstErrorFrame:SetScript("OnHide", function() state = 0 end)
 local Error = CreateFrame("Frame")
 Error:RegisterEvent("UI_ERROR_MESSAGE")
 Error:SetScript("OnEvent", function(_, _, error)
 	if state == 0 then
-		firstErrorFrame.text:SetText(error)
+		firstErrorFrame.text:SetText(TranslateError(error))
 		FadingFrame_Show(firstErrorFrame)
 		state = 1
 	 else
-		secondErrorFrame.text:SetText(error)
+		secondErrorFrame.text:SetText(TranslateError(error))
 		FadingFrame_Show(secondErrorFrame)
 		state = 0
 	 end
