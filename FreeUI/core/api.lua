@@ -41,15 +41,15 @@ C.classcolours = {
 	["DEATHKNIGHT"] = {r = 0.77, g = 0.12, b = 0.23},
 	["DEMONHUNTER"] = {r = 0.64, g = 0.19, b = 0.79},
 	["DRUID"] = {r = 1, g = 0.49, b = 0.04},
-	["HUNTER"] = {r = 0.58, g = 0.86, b = 0.49},
-	["MAGE"] = {r = 0, g = 0.76, b = 1},
-	["MONK"] = {r = 0.0, g = 1.00 , b = 0.59},
-	["PALADIN"] = {r = 1, g = 0.22, b = 0.52},
-	["PRIEST"] = {r = 0.8, g = 0.87, b = .9},
-	["ROGUE"] = {r = 1, g = 0.91, b = 0.2},
-	["SHAMAN"] = {r = 0, g = 0.6, b = 0.6},
-	["WARLOCK"] = {r = 0.6, g = 0.47, b = 0.85},
-	["WARRIOR"] = {r = 0.9, g = 0.65, b = 0.45},
+	["HUNTER"] = {r = 0.67, g = 0.83, b = 0.45},
+	["MAGE"] = {r = 0.41, g = 0.80, b = 0.94},
+	["MONK"] = {r = 0.43, g = 1 , b = 0.50},
+	["PALADIN"] = {r = 0.96, g = 0.55, b = 0.73},
+	["PRIEST"] = {r = 1, g = 1, b = 1},
+	["ROGUE"] = {r = 1, g = 0.96, b = 0.41},
+	["SHAMAN"] = {r = 0, g = 0.44, b = 0.87},
+	["WARLOCK"] = {r = 0.58, g = 0.51, b = 0.79},
+	["WARRIOR"] = {r = 0.78, g = 0.61, b = 0.43},
 }
 
 local _, class = UnitClass("player")
@@ -184,13 +184,14 @@ F.CreatePulse = function(frame) -- pulse function originally by nightcracker
 end
 
 local r, g, b = unpack(C.class)
-local buttonR, buttonG, buttonB, buttonA = .3, .3, .3, .3
+local buttonR, buttonG, buttonB, buttonA = .06, .06, .06, .8
 
 local CreateGradient = function(f)
 	local tex = f:CreateTexture(nil, "BORDER")
 	tex:SetPoint("TOPLEFT", 1, -1)
 	tex:SetPoint("BOTTOMRIGHT", -1, 1)
-	tex:SetTexture(C.media.gradient)
+	tex:SetTexture(C.media.backdrop)
+--	tex:SetGradientAlpha("VERTICAL", 0, 0, 0, .3, .35, .35, .35, .35)
 	tex:SetVertexColor(buttonR, buttonG, buttonB, buttonA)
 
 	return tex
@@ -198,19 +199,22 @@ end
 
 F.CreateGradient = CreateGradient
 
-local function colourButton(f)
+local function StartGlow(f)
 	if not f:IsEnabled() then return end
-
-	f:SetBackdropColor(r, g, b, buttonA)
+	f:SetBackdropColor(r, g, b, .1)
 	f:SetBackdropBorderColor(r, g, b)
+	f.glow:SetAlpha(1)
+	F.CreatePulse(f.glow)
 end
 
-local function clearButton(f)
+local function StopGlow(f)
 	f:SetBackdropColor(0, 0, 0, 0)
 	f:SetBackdropBorderColor(0, 0, 0)
+	f.glow:SetScript("OnUpdate", nil)
+	f.glow:SetAlpha(0)
 end
 
-F.Reskin = function(f, noHighlight)
+F.Reskin = function(f, noGlow)
 	f:SetNormalTexture("")
 	f:SetHighlightTexture("")
 	f:SetPushedTexture("")
@@ -224,11 +228,21 @@ F.Reskin = function(f, noHighlight)
 
 	F.CreateBD(f, 0)
 
-	f.tex = CreateGradient(f)
+	CreateGradient(f)
 
-	if not noHighlight then
-		f:HookScript("OnEnter", colourButton)
- 		f:HookScript("OnLeave", clearButton)
+	if not noGlow then
+		f.glow = CreateFrame("Frame", nil, f)
+		f.glow:SetBackdrop({
+			edgeFile = C.media.glow,
+			edgeSize = 5,
+		})
+		f.glow:SetPoint("TOPLEFT", -6, 6)
+		f.glow:SetPoint("BOTTOMRIGHT", 6, -6)
+		f.glow:SetBackdropBorderColor(r, g, b)
+		f.glow:SetAlpha(0)
+
+		f:HookScript("OnEnter", StartGlow)
+ 		f:HookScript("OnLeave", StopGlow)
 	end
 end
 
@@ -258,16 +272,27 @@ local function clearScroll(f)
 	f.tex:SetVertexColor(1, 1, 1)
 end
 
-F.ReskinScroll = function(f)
+F.ReskinScroll = function(f, parent)
 	local frame = f:GetName()
 
-	if _G[frame.."Track"] then _G[frame.."Track"]:Hide() end
-	if _G[frame.."BG"] then _G[frame.."BG"]:Hide() end
-	if _G[frame.."Top"] then _G[frame.."Top"]:Hide() end
-	if _G[frame.."Middle"] then _G[frame.."Middle"]:Hide() end
-	if _G[frame.."Bottom"] then _G[frame.."Bottom"]:Hide() end
+	if frame then
+		if _G[frame.."Track"] then _G[frame.."Track"]:Hide() end
+		if _G[frame.."BG"] then _G[frame.."BG"]:Hide() end
+		if _G[frame.."Top"] then _G[frame.."Top"]:Hide() end
+		if _G[frame.."Middle"] then _G[frame.."Middle"]:Hide() end
+		if _G[frame.."Bottom"] then _G[frame.."Bottom"]:Hide() end
+	else
+		if f.trackBG then f.trackBG:Hide() end
+		if f.Background then f.Background:Hide() end
+		if f.Top then f.Top:Hide() end
+		if f.Middle then f.Middle:Hide() end
+		if f.Bottom then f.Bottom:Hide() end
+		if f.ScrollBarTop then f.ScrollBarTop:Hide() end
+		if f.ScrollBarMiddle then f.ScrollBarMiddle:Hide() end
+		if f.ScrollBarBottom then f.ScrollBarBottom:Hide() end
+	end
 
-	local bu = _G[frame.."ThumbTexture"]
+	local bu = f.ThumbTexture or f.thumbTexture or _G[frame.."ThumbTexture"]
 	bu:SetAlpha(0)
 	bu:SetWidth(17)
 
@@ -280,8 +305,8 @@ F.ReskinScroll = function(f)
 	tex:SetPoint("TOPLEFT", bu.bg, 1, -1)
 	tex:SetPoint("BOTTOMRIGHT", bu.bg, -1, 1)
 
-	local up = _G[frame.."ScrollUpButton"]
-	local down = _G[frame.."ScrollDownButton"]
+	local up = f.ScrollUpButton or f.UpButton or _G[(frame or parent).."ScrollUpButton"]
+ 	local down = f.ScrollDownButton or f.DownButton or _G[(frame or parent).."ScrollDownButton"]
 
 	up:SetWidth(17)
 	down:SetWidth(17)
@@ -343,11 +368,21 @@ F.ReskinDropDown = function(f)
 	if middle then middle:SetAlpha(0) end
 	if right then right:SetAlpha(0) end
 
-	local down = _G[frame.."Button"]
+	local bg = CreateFrame("Frame", nil, f)
+ 	bg:SetPoint("TOPLEFT", 10, -4)
+ 	bg:SetPoint("BOTTOMRIGHT", -12, 8)
+ 	bg:SetFrameLevel(f:GetFrameLevel()-1)
+ 	F.CreateBD(bg, 0)
+  
+ 	local gradient = F.CreateGradient(f)
+ 	gradient:SetPoint("TOPLEFT", bg, 1, -1)
+ 	gradient:SetPoint("BOTTOMRIGHT", bg, -1, 1)
+ 
+ 	local down = _G[frame.."Button"]
 
 	down:SetSize(20, 20)
 	down:ClearAllPoints()
-	down:SetPoint("RIGHT", -18, 2)
+	down:SetPoint("TOPRIGHT", bg)
 
 	F.Reskin(down, true)
 
@@ -367,15 +402,6 @@ F.ReskinDropDown = function(f)
 	down:HookScript("OnEnter", colourArrow)
 	down:HookScript("OnLeave", clearArrow)
 
-	local bg = CreateFrame("Frame", nil, f)
-	bg:SetPoint("TOPLEFT", 16, -4)
-	bg:SetPoint("BOTTOMRIGHT", -18, 8)
-	bg:SetFrameLevel(f:GetFrameLevel()-1)
-	F.CreateBD(bg, 0)
-
-	local gradient = CreateGradient(f)
-	gradient:SetPoint("TOPLEFT", bg, 1, -1)
-	gradient:SetPoint("BOTTOMRIGHT", bg, -1, 1)
 end
 
 local function colourClose(f)
@@ -611,19 +637,22 @@ end
 F.ReskinPortraitFrame = function(f, isButtonFrame)
 	local name = f:GetName()
 
-	_G[name.."Bg"]:Hide()
+	f.Bg:Hide()
 	_G[name.."TitleBg"]:Hide()
-	_G[name.."Portrait"]:Hide()
-	_G[name.."PortraitFrame"]:Hide()
+	f.portrait:Hide()
+	f.portraitFrame:Hide()
 	_G[name.."TopRightCorner"]:Hide()
-	_G[name.."TopLeftCorner"]:Hide()
-	_G[name.."TopBorder"]:Hide()
-	_G[name.."TopTileStreaks"]:SetTexture("")
+	f.topLeftCorner:Hide()
+	f.topBorderBar:Hide()
+	f.TopTileStreaks:SetTexture("")
 	_G[name.."BotLeftCorner"]:Hide()
 	_G[name.."BotRightCorner"]:Hide()
 	_G[name.."BottomBorder"]:Hide()
-	_G[name.."LeftBorder"]:Hide()
+	f.leftBorderBar:Hide()
 	_G[name.."RightBorder"]:Hide()
+
+	F.ReskinClose(f.CloseButton)
+	f.portrait.Show = F.dummy
 
 	if isButtonFrame then
 		_G[name.."BtnCornerLeft"]:SetTexture("")
@@ -635,7 +664,7 @@ F.ReskinPortraitFrame = function(f, isButtonFrame)
 	end
 
 	F.CreateBD(f)
-	F.ReskinClose(_G[name.."CloseButton"])
+	F.CreateSD(f)
 end
 
 F.CreateBDFrame = function(f, a)
@@ -746,3 +775,4 @@ F.ReskinIcon = function(icon)
 	icon:SetTexCoord(.08, .92, .08, .92)
 	return F.CreateBG(icon)
 end
+
