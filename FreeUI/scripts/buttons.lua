@@ -9,6 +9,8 @@ local r, g, b = unpack(C.class)
 local _G = _G
 local gsub = gsub
 
+local locale = GetLocale()
+
 local showHotKey = C.actionbars.hotkey
 
 F.AddOptionsCallback("actionbars", "hotkey", function()
@@ -43,6 +45,14 @@ local function updateHotkey(self)
 			text = text:gsub("(s%-)", "S")
 			text = text:gsub("(a%-)", "A")
 			text = text:gsub("(c%-)", "C")
+			
+			if locale == "zhCN" then
+				text = text:gsub("鼠标按键", "M")
+    				text = text:gsub("鼠标中键", "M3")
+    				text = text:gsub("鼠标滚轮向上滚动", "MU")
+    				text = text:gsub("鼠标滚轮向下滚动", "MD")
+			end
+			
 			text = text:gsub("Mouse Button", "M")
 			text = text:gsub("Middle Mouse", "M3")
 			text = text:gsub("Mouse Wheel Up", "MU")
